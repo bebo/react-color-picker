@@ -29,47 +29,55 @@ import ColorPicker from 'react-color-picker'
 
 import 'react-color-picker/index.css'
 
-var App = React.createClass({
+class App extends React.Component {
 
-    displayName: 'App',
-
-    onDrag: function(color, c){
-        COLOR = color
-        this.setState({})
-    },
-
-    render: function(){
-        return (
-            <div>
-                <ColorPicker value={COLOR} onDrag={this.onDrag} />
-                <div style={{background: COLOR, width: 100, height: 50, color: 'white'}}>
-                    {COLOR}
-                </div>
-            </div>
-        )
+  constructor(props) {
+    super(props)
+    this.state = {
+      color: 'red'
     }
-})
+  }
 
-render(<App />, document.body)
+  onDrag(color, c) {
+    this.setState({
+      color
+    })
+  }
 
+  render() {
+    return <div>
+      <ColorPicker value={this.state.color} onDrag={this.onDrag.bind(this)} />
+      <div style={{
+        background: this.state.color,
+        width: 100,
+        height: 50,
+        color: 'white'
+      }}>
+        {this.state.color}
+      </div>
+    </div>
+  }
+
+}
+
+render(<App />, document.getElementById('content'))
 ```
 
 Example (**uncontrolled**)
 ```jsx
-React.renderComponent(
-    <ColorPicker defaultValue='#452135'/>,
-    document.body
+render(
+  <ColorPicker defaultValue='#452135'/>,
+  document.getElementById('content')
 )
 
 ```
-
 ## HueSpectrum
 
 You can use only the hue spectrum if that is what you need.
 
 ```jsx
-var React = require('react')
-var HueSpectrum = require('react-color-picker').HueSpectrum
+import React from 'react'
+import { HueSpectrum } from 'react-color-picker'
 
 <HueSpectrum value={color} width={100}/>
 <HueSpectrum defaultValue="red" />
@@ -80,8 +88,8 @@ var HueSpectrum = require('react-color-picker').HueSpectrum
 You can use only the saturation spectrum if that is what you need.
 
 ```jsx
-var React = require('react')
-var SaturationSpectrum = require('react-color-picker').SaturationSpectrum
+import React from 'react'
+import { SaturationSpectrum } from 'react-color-picker'
 
 <SaturationSpectrum value={color} height={400}/>
 <SaturationSpectrum defaultValue="red" />
@@ -131,7 +139,7 @@ $ npm install
 $ npm dev
 ```
 
-Now navigate to [localhost:8090](http://localhost:8090/)
+Now navigate to [localhost:8080](http://localhost:8080/)
 
 Before building a new version, make sure you run
 
