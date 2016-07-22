@@ -60,6 +60,7 @@ class ColorPicker extends Component {
     const hueConfig = {
       onDrag: this.handleHueDrag,
       onChange: this.handleHueChange,
+      onMouseDown: this.handleHueMouseDown,
       height: props.hueHeight || props.saturationHeight,
       width: props.hueWidth,
       inPicker: true,
@@ -126,6 +127,10 @@ class ColorPicker extends Component {
   }
 
   handleHueDrag(hsv) {
+    this.setState({
+      dragHue: hsv.h
+    })
+
     this.handleDrag(hsv)
   }
 
@@ -141,6 +146,12 @@ class ColorPicker extends Component {
     }
 
     this.props.onDrag(this.toStringValue(color), color)
+  }
+
+  handleHueMouseDown(hsv) {
+    this.setState({
+      dragHue: hsv.h
+    })
   }
 
   handleSaturationMouseDown(hsv){

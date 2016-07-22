@@ -117,11 +117,11 @@ export default {
   },
 
   getColors() {
-    const first = this.props.inPicker?
+    const first = this.props.inPicker ?
       this.hsv :
       this.toStringValue(this.hsv)
 
-    const args = [first]
+    const args = [ first ]
 
     if (!this.props.inPicker) {
       args.push(assign({}, this.hsv))
