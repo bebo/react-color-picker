@@ -1,12 +1,10 @@
-'use strict'
+import assign from 'object-assign'
+import { toColor } from './color'
 
-var assign = require('object-assign')
-var toColor = require('./color').toColor
+export default (color) => {
+  color = toColor(assign({}, color))
 
-module.exports = function toStringValue(color){
-    color = toColor(assign({}, color))
-
-    return color.toRgb().a == 1?
-                color.toHexString():
-                color.toRgbString()
+  return color.toRgb().a == 1 ?
+    color.toHexString() :
+    color.toRgbString()
 }

@@ -1,1 +1,1 @@
-module.exports = 'red'
+export default 'red'

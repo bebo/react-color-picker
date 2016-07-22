@@ -1,0 +1,5 @@
+$THEME_NAME: 'default' !default;
+
+.react-color-picker--theme-#{$THEME_NAME} {
+  color: inherit;
+}

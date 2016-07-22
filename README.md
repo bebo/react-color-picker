@@ -16,29 +16,18 @@ No images have been used in the making of this color picker :)
 $ npm install react-color-picker
 ```
 
-## Changelog
-
-See [changelog](./CHANGELOG.md)
-
-#### Other
-
-Use `dist/react-color-picker.js`, which uses umd (exported as `ColorPicker`).
-
-Use version `>=2.0.0` for React `>=0.12.0`. For previous React versions, use `==1.4.1`.
-
 ## Usage
-
-`react-color-picker` does not include `React` (not even in `dist/react-color-picker.js`) so you'll have to manually include that.
-
 You can have either **controlled** (using **value**) or **uncontrolled** (using **defaultValue**) pickers.
 
-#### Please don't forget to include the styles!!! - `index.css` or `index.styl`
+#### Please don't forget to include the styles!!! - `index.css`
 
 Example (**controlled**)
 ```jsx
+import { render } from 'react-dom'
+import React from 'react'
+import ColorPicker from 'react-color-picker'
 
-var React = require('react')
-var ColorPicker = require('react-color-picker')
+import 'react-color-picker/index.css'
 
 var App = React.createClass({
 
@@ -50,7 +39,6 @@ var App = React.createClass({
     },
 
     render: function(){
-
         return (
             <div>
                 <ColorPicker value={COLOR} onDrag={this.onDrag} />
@@ -62,7 +50,7 @@ var App = React.createClass({
     }
 })
 
-React.renderComponent(App(), document.body)
+render(<App />, document.body)
 
 ```
 

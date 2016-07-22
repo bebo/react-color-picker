@@ -32,3 +32,6 @@ node_modules
 
 # Idea
 .idea
+*.sublime-project
+index.css
+base.css

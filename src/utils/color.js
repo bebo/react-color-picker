@@ -1,50 +1,46 @@
-'use strict'
-
-var tinycolor = require('tinycolor2')
-
-if (typeof window != 'undefined'){
-    window.tinycolor = tinycolor
-}
+import tinycolor from 'tinycolor2'
 
 function toColor(color){
-    return tinycolor(color)
+  return tinycolor(color)
 }
 
 function toPure(color){
-    var h = toColor(color).toHsl().h
+  const h = toColor(color).toHsl().h
 
-    return toColor({ h: h, s: 100, l: 50, a: 1})
+  return toColor({ h, s: 100, l: 50, a: 1})
 }
 
 function fromRatio(color){
-    return tinycolor.fromRatio(color)
+  return tinycolor.fromRatio(color)
 }
 
 function toAlpha(color, alpha){
-    if (alpha > 1){
-        alpha = alpha/100
-    }
+  if (alpha > 1){
+    alpha = alpha/100
+  }
 
-    color   = toColor(color).toRgb()
-    color.a = alpha
+  color = toColor(color).toRgb()
+  color.a = alpha
 
-    return toColor(color)
+  return toColor(color)
 }
 
 function toHsv(color){
-    return toColor(color).toHsv()
+  return toColor(color).toHsv()
 }
 
-var Color = {
-    toColor  : toColor,
-    toPure   : toPure,
-    fromRatio: fromRatio,
-    toAlpha  : toAlpha,
-    toHsv    : toHsv
+export default {
+  fromRatio,
+  toAlpha,
+  toColor,
+  toHsv,
+  toPure
 }
 
-if (typeof window != 'undefined'){
-    window.color = Color
+export {
+  fromRatio,
+  toAlpha,
+  toColor,
+  toHsv,
+  toPure
 }
-
-module.exports = Color

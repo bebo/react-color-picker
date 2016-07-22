@@ -1,13 +1,14 @@
 'use strict'
 
-var React     = require('react')
-var ReactDOM  = require('react-dom');
-var Region    = require('region')
-var assign    = require('object-assign')
-var fromRatio = require('./utils/color').fromRatio
-var common    = require('./utils/common')
+import React     from 'react'
+import ReactDOM  from 'react-dom'
+import Region    from 'region'
+import assign    from 'object-assign'
+import { fromRatio } from './utils/color'
+import common    from './utils/common'
 
-var VALIDATE = require('./utils/validate')
+import VALIDATE from './utils/validate'
+import toStringValue from './utils/toStringValue'
 
 export default React.createClass(assign({
 
@@ -171,5 +172,5 @@ export default React.createClass(assign({
         this.hsv.v = this.getColorValueForPoint(point)
     },
 
-    toStringValue: require('./utils/toStringValue')
+    toStringValue
 }, common))

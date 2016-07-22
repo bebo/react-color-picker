@@ -1,48 +1,48 @@
-'use strict'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Region from 'region'
+import assign from 'object-assign'
+import common from './utils/common'
 
-var React  = require('react')
-var ReactDOM = require('react-dom');
-var Region = require('region')
-var assign   = require('object-assign')
-var common = require('./utils/common')
+import VALIDATE from './utils/validate'
 
-var VALIDATE = require('./utils/validate')
+import toStringValue from './utils/toStringValue'
 
-module.exports = React.createClass(assign({
+export default React.createClass(assign({
 
     displayName: 'HueSpectrum',
 
-    getDefaultProps: function(){
-        return {
-            height      : 300,
-            width       : 30,
-            pointerSize : 3,
-            defaultColor: require('./defaultColor')
-        }
+    getDefaultProps(){
+      return {
+        height      : 300,
+        width       : 30,
+        pointerSize : 3,
+        defaultColor: require('./defaultColor')
+      }
     },
 
-    getInitialState: function(){
+    getInitialState(){
         return {
             h: 0
         }
     },
 
-    componentDidUpdate: function(){
+    componentDidUpdate(){
         // this.updateDragPositionIf()
     },
 
-    componentDidMount: function(){
+    componentDidMount(){
         this.updateDragPositionIf()
     },
 
-    updateDragPositionIf: function(){
+    updateDragPositionIf(){
 
         if (!this.props.height){
             this.setState({})
         }
     },
 
-    render: function(){
+    render(){
         this.hsv = this.toColorValue(this.state.value || this.props.value || this.props.defaultValue || this.props.defaultColor)
         // console.log('hue:', this.hsv)
 
@@ -79,7 +79,7 @@ module.exports = React.createClass(assign({
         )
     },
 
-    getDragPosition: function(hsv){
+    getDragPosition(hsv){
         hsv = hsv || this.hsv
 
         if (!this.props.height && !this.isMounted()){
@@ -95,7 +95,7 @@ module.exports = React.createClass(assign({
         return pos - diff
     },
 
-    updateColor: function(point){
+    updateColor(point){
         point = VALIDATE(point)
 
         this.hsv.h = point.y * 360 / point.height
@@ -107,5 +107,5 @@ module.exports = React.createClass(assign({
         this.state.h = this.hsv.h != 0? this.hsv.h: 0
     },
 
-    toStringValue: require('./utils/toStringValue')
+    toStringValue
 }, common))

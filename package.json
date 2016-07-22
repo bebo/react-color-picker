@@ -1,18 +1,15 @@
 {
   "name": "react-color-picker",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "React Color Picker",
   "main": "lib/index.js",
   "scripts": {
-    "test": "make",
-    "start": "npm run serve && npm run dev",
-    "serve": "http-server",
-    "css": "webpack --colors --progress --config stylus.config.js",
-    "lib": "gulp && npm run css",
-    "dist": "webpack --progress --colors --config dist.config.js",
-    "dist.min": "webpack --progress --colors --optimize-minimize --optimize-occurence-order --optimize-dedupe --config dist.min.config.js",
-    "build": "npm run dist && npm run dist.min && npm run lib",
-    "dev": "webpack-dev-server --progress --colors --port 8090"
+    "dev": "webpack-dev-server --progress --config build/webpack.config.js",
+    "styles": "theme-builder",
+    "lib": "rimraf lib && npm run babel",
+    "babel": "babel --out-dir lib src",
+    "build": "npm run styles && npm run lib",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "react",
@@ -22,27 +19,28 @@
     "color-picker"
   ],
   "dependencies": {
-    "drag-helper": "^1.2.3",
-    "object-assign": "^4.0.1",
+    "drag-helper": "^1.3.3",
+    "object-assign": "^4.1.0",
+    "react-class": "^3.1.4",
     "region": "^2.1.2",
-    "tinycolor2": "^1.1.1"
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
-    "autoprefixer-loader": "^3.1.0",
-    "babel-core": "^5.4.3",
-    "babel-loader": "^5.1.2",
-    "css-loader": "~0.9.0",
-    "extract-text-webpack-plugin": "~0.3.1",
-    "gulp": "^3.8.11",
-    "gulp-babel": "^5.1.0",
-    "style-loader": "~0.8.1",
-    "stylus-loader": "~0.4.0",
-    "webpack": "^1.9.7",
-    "webpack-dev-server": "^1.8.2"
+    "autoprefixer-loader": "^3.2.0",
+    "babel-cli": "^6.11.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "rimraf": "^2.5.3",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1",
+    "zippyui-theme-builder": "^1.0.2"
   },
   "peerDependencies": {
-    "react": ">=0.14.0",
-    "react-dom": ">=0.14.0"
+    "react": ">=0.14.0 || >=15.0.0",
+    "react-dom": ">=0.14.0 || >=15.0.0"
   },
   "repository": {
     "type": "git",

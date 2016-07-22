@@ -1,14 +1,16 @@
 'use strict';
 
-require('./style/index.styl')
+import './style/index.scss'
 
-var React       = require('react')
-var ReactDOM    = require('react-dom')
-var ColorPicker = require('./src')
+import React from 'react'
+import { render } from 'react-dom'
 
-var COLOR = '#F28281'
 
-var App = React.createClass({
+import ColorPicker from './src'
+
+let COLOR = '#F28281'
+
+let App = React.createClass({
 
     onDrag: function(c){
         COLOR = c
@@ -35,6 +37,5 @@ var App = React.createClass({
     }
 })
 
-
-ReactDOM.render(<App />, document.getElementById('content'))
+render(<App />, document.getElementById('content'))
 
