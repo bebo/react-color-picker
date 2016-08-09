@@ -35,7 +35,9 @@ class ColorPicker extends Component {
   }
 
   render(){
-    const props = this.prepareProps(assign({}, this.props))
+    const props = this.props
+
+    const className = this.prepareClassName(props)
     const hueStyle = assign({}, this.props.hueStyle) || {}
 
     hueStyle.marginLeft = this.props.hueMargin
@@ -48,24 +50,51 @@ class ColorPicker extends Component {
       this.toColorValue(this.state.value || props.defaultValue || props.defaultColor):
       null
 
-    const saturationConfig = {
-      onDrag: this.handleSaturationDrag,
-      onChange: this.handleSaturationChange,
-      onMouseDown: this.handleSaturationMouseDown,
-      height: props.saturationHeight,
-      width: props.saturationWidth,
-      inPicker: true
+    let { children } = props
+    let hueSpectrumProps = null
+    let saturationSpectrumProps = null
+
+    if (children) {
+      children = React.Children.toArray(children).forEach(child => {
+        if (child && child.props) {
+          if (child.props.isHueSpectrum) {
+            hueSpectrumProps = assign({}, child.props)
+          }
+          if (child.props.isSaturationSpectrum) {
+            saturationSpectrumProps = assign({}, child.props)
+          }
+        }
+      })
     }
 
-    const hueConfig = {
+    const saturationConfig = assign({
+      onDrag: this.handleSaturationDrag,
+      onChange: this.handleSaturationChange,
+      onMouseDown: this.handleSaturationMouseDown
+    }, saturationSpectrumProps)
+
+    if (saturationConfig.width === undefined){
+      saturationConfig.width = props.saturationWidth
+    }
+    if (saturationConfig.height === undefined){
+      saturationConfig.height = props.saturationHeight
+    }
+    saturationConfig.inPicker = true
+
+    const hueConfig = assign({
       onDrag: this.handleHueDrag,
       onChange: this.handleHueChange,
       onMouseDown: this.handleHueMouseDown,
-      height: props.hueHeight || props.saturationHeight,
-      width: props.hueWidth,
-      inPicker: true,
       style: hueStyle
+    }, hueSpectrumProps)
+
+    if (hueConfig.width === undefined) {
+      hueConfig.width = props.hueWidth
     }
+    if (hueConfig.height === undefined) {
+      hueConfig.height = props.hueHeight || props.saturationHeight
+    }
+    hueConfig.inPicker = true
 
     if (this.state.dragHue){
       ;(value || defaultValue).h = this.state.dragHue
@@ -92,7 +121,7 @@ class ColorPicker extends Component {
     delete divProps.saturationWidth
     delete divProps.value
 
-    return <div {...divProps}>
+    return <div {...divProps} className={className} >
       <SaturationSpectrum {...saturationConfig} />
       <HueSpectrum {...hueConfig} />
     </div>

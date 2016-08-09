@@ -14,10 +14,11 @@ export default React.createClass(assign({
 
     getDefaultProps(){
       return {
-        height      : 300,
-        width       : 30,
-        pointerSize : 3,
-        defaultColor: require('./defaultColor')
+        height: 300,
+        width: 30,
+        pointerSize: 3,
+        defaultColor: require('./defaultColor'),
+        isHueSpectrum: true
       }
     },
 

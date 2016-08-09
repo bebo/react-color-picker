@@ -15,12 +15,13 @@ export default React.createClass(assign({
     displayName: 'SaturationSpectrum',
 
     getDefaultProps: function(){
-        return {
-            height      : 300,
-            width       : 300,
-            pointerSize : 7,
-            defaultColor: require('./defaultColor')
-        }
+      return {
+        height      : 300,
+        width       : 300,
+        pointerSize : 7,
+        defaultColor: require('./defaultColor'),
+        isSaturationSpectrum: true
+      }
     },
 
     getInitialState: function(){
