@@ -5,13 +5,13 @@ import './style/index.scss'
 import React from 'react'
 import { render } from 'react-dom'
 import autoBind from 'react-class/autoBind'
-import ColorPicker, { HueSpectrum, SaturationSpectrum } from './src'
+import  { HueSpectrum } from './src'
 
 class App extends React.Component {
 
   constructor(props) {
     super(props)
-    autoBind(this)
+    autoBind(this);
     this.state = {
       color: '#000'
     }
@@ -25,10 +25,7 @@ class App extends React.Component {
 
   render() {
     return <div>
-      <ColorPicker value={this.state.color} onDrag={this.onDrag}>
-        <SaturationSpectrum style={{borderRadius: 20}} />
-        <HueSpectrum style={{}}/>
-      </ColorPicker>
+        <HueSpectrum style={{}} onDrag={this.onDrag} defaultColor="red"/>
       <div style={{background: this.state.color, width: 100, height: 50, color: 'white'}}>
         {this.state.color}
       </div>

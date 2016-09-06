@@ -32,6 +32,10 @@ export default {
     const region = this.getDOMRegion()
     const info = this.getEventInfo(event, region)
 
+    if(!info) {
+      return false;
+    }
+
     DragHelper(event, {
       scope: this,
       constrainTo: region,
@@ -60,7 +64,7 @@ export default {
   },
 
   handleMouseDown(event, config) {
-    ;(this.props.onMouseDown || emptyFn).apply(this, this.getColors())
+    (this.props.onMouseDown || emptyFn).apply(this, this.getColors());
     this.handleDrag(event, config)
   },
 
@@ -131,10 +135,19 @@ export default {
   },
 
   getEventInfo(event, region) {
-    region = region || this.getDOMRegion()
+    region = region || this.getDOMRegion();
+    let x = 0;
+    let y = 0;
+    if(event.clientX){
+      x = event.clientX - region.left;
+      y = event.clientY - region.top;
+    } else if(event.touches && event.touches['0']) {
+      x = event.touches['0'].clientX;
+      y = event.touches['0'].clientY;
+    } else {
+      return false;
+    }
 
-    const x = event.clientX - region.left
-    const y = event.clientY - region.top
 
     return {
       x,
