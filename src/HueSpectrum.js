@@ -79,7 +79,7 @@ export default React.createClass(assign({
           dragStyle.top = dragPos
           dragStyle.display = 'block'
         }
-        return <div className='react-color-picker__hue-spectrum' style={style} onTouchStart={this.onMouseDown}>
+        return <div className='react-color-picker__hue-spectrum' style={style} onMouseDown={this.onMouseDown} onTouchStart={this.onMouseDown}>
           <div className="react-color-picker__hue-drag" style={dragStyle}>
             <div className="react-color-picker__hue-inner" />
           </div>
